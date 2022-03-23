@@ -1,21 +1,35 @@
-#include <stdio.h>
+#include<stdio.h>
 #include<string.h>
-void main()
-{ 
-	char c[100];
-	printf("输入一句优美的英文：");
-	gets(c);
-	printf("输出你需要统计的单词：");
-	char ch[10];
-	gets(ch);
-		int count=0;
-		for(int i=0;i<sizeof(ch);i++)
+int times(char s[],char substr[])
+{
+	int i =0, j, times=0;
+	while(s[i])
+	{
+		j =0;
+		while (substr[j])
 		{
-			if(c[i]>='A'&&c[i]<='Z')
-				c[i]=c[i]-32;
-			for(int b=0;b<sizeof(ch);b++)
-				if((c[i]==ch[b] || c[i+1]==ch[b+1]) && (c[i]!=' '&&c[i+1]!=' '))
-						count++;
+			if (substr[j] !=s[i + j])
+				break;
+			j++;
 		}
-	printf("%d",count);
+		if (!substr[j])
+		{
+			times++;
+			i += j -1;
+		}
+		i++;
+	}
+	return times;
+}
+
+int main()
+{
+	char s[100] =" ";
+	printf("请输入字符串\n");
+	gets(s);
+	char substr[100]=" ";
+	printf("请输入你想要统计的字符(小写)\n");
+	scanf("%s",&substr);
+	printf("次数有%d次\n",times(strlwr(s),substr));
+		return 0;
 }
